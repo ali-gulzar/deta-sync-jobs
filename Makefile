@@ -9,3 +9,7 @@ format:
 .PHONY: run-sync-jobs
 run-sync-jobs:
 	python main.py
+
+.PHONY: deploy
+deploy:
+	deta deploy
