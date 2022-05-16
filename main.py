@@ -8,8 +8,8 @@ X_RAPIDAPI_KEY = os.environ["X_RAPIDAPI_KEY"]
 DETA_PROJECT_KEY = os.environ["DETA_PROJECT_KEY"]
 
 
-@app.lib.cron()
-def sync_recipes(event):
+
+def sync_recipes():
     start_time = time.time()
     url = "https://random-recipes.p.rapidapi.com/ai-quotes/2199"
     headers = {
@@ -25,7 +25,7 @@ def sync_recipes(event):
         id = recipe.pop("id")
         data = {
             "title": recipe["title"].lower(),
-            "ingredients": ("-INGREDIENT-").join(recipe["ingredients"]),
+            "ingredients": ("-INGREDIENT-").join([item.lower() for item in recipe["ingredients"]]),
             "steps": ("-STEP-").join([item["text"] for item in recipe["instructions"]]),
             "image": recipe["image"],
         }
