@@ -8,7 +8,7 @@ DETA_PROJECT_KEY = os.environ["DETA_PROJECT_KEY"]
 
 
 @app.lib.cron()
-def sync_recipes():
+def sync_recipes(event):
     url = "https://random-recipes.p.rapidapi.com/ai-quotes/2199"
     headers = {
         "X-RapidAPI-Host": "random-recipes.p.rapidapi.com",
