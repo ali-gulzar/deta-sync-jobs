@@ -8,8 +8,8 @@ X_RAPIDAPI_KEY = os.environ["X_RAPIDAPI_KEY"]
 DETA_PROJECT_KEY = os.environ["DETA_PROJECT_KEY"]
 
 
-
-def sync_recipes():
+@app.lib.cron()
+def sync_recipes(event):
     start_time = time.time()
     url = "https://random-recipes.p.rapidapi.com/ai-quotes/2199"
     headers = {
@@ -31,4 +31,5 @@ def sync_recipes():
         }
         db.put(data, str(id))
 
-    print(f"execution time {time.time() - start_time} seconds.")
+    execution_time = f"execution time {time.time() - start_time} seconds."
+    return execution_time
